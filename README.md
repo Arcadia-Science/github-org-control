@@ -4,7 +4,7 @@ This repository implements a simple cron job that makes sure all Arcadia Science
 
 ## Motivation
 
-When a user within the Arcadia Science organization, that repository does not have any branch protections. This means the user can push/force push to any branch. This is suboptimal because we'd like most major changes to go through code review. GitHub conveniently offers easily customizable branch protection rules, but these can only be set at the repository level and no organization-wide defaults exist.
+When a user within the Arcadia Science organization creates a new Github repository, that repository does not have any branch protections. This means the user can push/force push to any branch. This is suboptimal because we'd like most major changes to go through code review. GitHub conveniently offers easily customizable branch protection rules, but these can only be set at the repository level and no organization-wide defaults exist.
 
 Here we don't want to modify existing branch protection rules of a repo. Each repo has its own unique needs and should be customizable. But if a repo doesn't have any controls, we want to set bare-minimum defaults. [This script](src/branch_protection.ts) run on a [cron job](.github/workflows/cron.yml) does just that.
 
