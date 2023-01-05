@@ -4,24 +4,23 @@ This repository implements a simple cron job that makes sure all Arcadia Science
 
 ## Motivation
 
-<!-- TODO: Add more details -->
+When a user within the Arcadia Science organization, that repository does not have any branch protections. This means the user can push/force push to any branch. This is suboptimal because we'd like most major changes to go through code review. GitHub conveniently offers easily customizable branch protection rules, but these can only be set at the repository level and no organization-wide defaults exist.
 
-This repository is heavily inspired by [this Stack Overflow answer](https://stackoverflow.com/questions/54222881/enable-branch-protection-rules-in-github-at-the-organisation-level).
+Here we don't want to modify existing branch protection rules of a repo. Each repo has its own unique needs and should be customizable. But if a repo doesn't have any controls, we want to set bare-minimum defaults. [This script](src/branch_protection.ts) run on a [cron job](.github/workflows/cron.yml) does just that.
 
-const DEFAULT_PROTECTION_RULES = {
-allow_force_pushes: false, // Permits force pushes to the protected branch by anyone with write access to the repository.
-allow_deletions: false, // Allows deletion of the protected branch by anyone with write access to the repository.
-enforce_admins: true, // Enforce all configured restrictions for administrators
-required_pull_request_reviews: {
-// Require at least one approving review on a pull request, before merging.
-dismiss_stale_reviews: false,
-require_code_owner_reviews: false,
-require_last_push_approval: false,
-required_approving_review_count: 1,
-},
-required_status_checks: null,
-restrictions: null,
-};
+This repository is heavily inspired by [this Stack Overflow answer](https://stackoverflow.com/questions/54222881/enable-branch-protection-rules-in-github-at-the-organisation-level). The main difference is the update behavior and the tooling choice of using GitHub official REST API wrapper.
+
+## Defaults
+
+Here the "protected branch" mostly is `main`. But there may be some exceptions to this rule because of past choices or nf-core standards. So we use the repo metadata to determine what the base branch is.
+
+By default:
+
+- We don't permit force pushes to the protected branch by anyone with write access to the repository.
+- We don't allow the deletion of the protected branch by anyone with write access to the repository.
+- We require at least one approving review on a pull request before merging.
+- We don't enforce status checks on each repository (not every repo has these and these should be configured at the single repo level)
+- We enforce all these settings to every user, including admins.
 
 ## Getting started
 
