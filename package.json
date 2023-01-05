@@ -3,14 +3,17 @@
   "version": "0.0.1",
   "scripts": {
     "build": "tsc",
-    "watch": "tsc --watch"
+    "watch": "tsc --watch",
+    "runJob": "node dist/branch_protection.js"
   },
   "packageManager": "yarn@3.1.1",
   "dependencies": {
-    "@types/node": "^18.11.9",
-    "axios": "^0.21.1",
+    "@octokit/rest": "^19.0.5",
     "dotenv": "^16.0.1",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.4"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.18"
   }
 }
