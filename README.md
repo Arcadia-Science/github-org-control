@@ -28,8 +28,8 @@ Create `.env` file with:
 
 ```
 // .env
-GITHUB_ORG=
-GITHUB_ACCESS_TOKEN=
+GH_ORG=
+GH_ACCESS_TOKEN=
 ```
 
 Instructions on getting the GitHub access token can be found [here](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
