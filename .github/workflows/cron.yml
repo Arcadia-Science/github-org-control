@@ -1,9 +1,9 @@
 name: Run Node.js branch_protection script on a schedule
 
-on:
-  push:
-  schedule:
-    - cron: "5 * * * *"
+# on:
+#   push:
+#   schedule:
+#     - cron: "5 * * * *"
 
 jobs:
   build:
@@ -13,6 +13,8 @@ jobs:
       - uses: actions/setup-node@v3
       - name: Install dependencies
         run: npm install
+      - name: Build the scripts
+        run: npm run build
       - name: Run script
         run: npm run runJob
         env:
